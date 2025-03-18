@@ -1,0 +1,18 @@
+/*
+ * Copyright (c) 2022 Google LLC.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/ {
+	aliases {
+		green-led = &green_led;
+		red-led = &red_led;
+	};
+    us0: HC-SR04 {
+        compatible = "hc-sr04";
+        trig-gpios = <&gpioe 13 GPIO_ACTIVE_HIGH>;
+        echo-gpios = <&gpioe 11 (GPIO_PULL_DOWN | GPIO_ACTIVE_HIGH)>;
+        status = "okay";
+    };
+};

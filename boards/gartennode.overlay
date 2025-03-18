@@ -1,0 +1,80 @@
+/*
+ * Copyright (c) 2022 Google LLC.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/ {
+	zephyr,user {
+		io-channels = <&adc1 8>;
+	};
+
+	pressure_sw: pressure_sw {
+		compatible = "power-switch";
+		/* using built-in LED pin for demonstration */
+		gpios = <&gpioa 0 (GPIO_PULL_DOWN | GPIO_ACTIVE_HIGH)>;
+        status = "okay";
+	};
+
+	ultrasonic_sw: ultrasonic_sw {
+		compatible = "power-switch";
+		/* using built-in LED pin for demonstration */
+		gpios = <&gpioa 1 (GPIO_PULL_DOWN | GPIO_ACTIVE_HIGH)>;
+        status = "okay";
+	};
+
+	temperature_sw: temperature_sw {
+		compatible = "power-switch";
+		/* using built-in LED pin for demonstration */
+		gpios = <&gpioa 2 (GPIO_PULL_DOWN | GPIO_ACTIVE_HIGH)>;
+        status = "okay";
+	};
+
+	aliases {
+		green-led = &green_led;
+	};
+    us0: HC-SR04 {
+        compatible = "hc-sr04";
+        trig-gpios = <&gpioa 4 GPIO_ACTIVE_HIGH>;
+        echo-gpios = <&gpioa 5 (GPIO_PULL_DOWN | GPIO_ACTIVE_HIGH)>;
+        status = "okay";
+    };
+	w1_0: w1-zephyr-gpio-0 {
+		compatible = "zephyr,w1-gpio";
+		gpios = <&gpioa 6 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN|GPIO_PULL_UP)>;
+		status = "okay";
+
+		temp_0: ds18b200 {
+			compatible = "maxim,ds18b20";
+			family-code = <0x28>;
+			resolution = <12>;
+			status = "okay";
+		};
+		temp_1: ds18b201 {
+			compatible = "maxim,ds18b20";
+			family-code = <0x28>;
+			resolution = <12>;
+			status = "okay";
+		};
+	};
+};
+
+&adc1 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	/* pinctrl-0 = <&adc1_in5_pa0 &adc1_in6_pa1 &adc1_in7_pa2 &adc1_in8_pa3 &adc1_in9_pa4 &adc1_in10_pa5 &adc1_in11_pa6 &adc1_in12_pa7>; */
+	pinctrl-0 = <&adc1_in8_pa3>;
+	pinctrl-names = "default";
+	st,adc-clock-source = <SYNC>;
+	st,adc-prescaler = <4>;
+	status = "okay";
+
+	channel@8 {
+		reg = <8>;
+		zephyr,gain = "ADC_GAIN_1";
+		zephyr,reference = "ADC_REF_INTERNAL";
+		zephyr,acquisition-time = <ADC_ACQ_TIME_DEFAULT>;
+		zephyr,resolution = <12>;
+	};
+};

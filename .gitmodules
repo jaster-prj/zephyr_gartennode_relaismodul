@@ -1,0 +1,3 @@
+[submodule "custom_boards"]
+	path = custom_boards
+	url = https://github.com/jaster-prj/zephyr_boards
