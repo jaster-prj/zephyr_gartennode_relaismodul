@@ -16,13 +16,19 @@ jobs:
         uses: actions/checkout@v4
         with:
           path: './zephyr_workspace/application'
-          submodules: 'true'
-      - name: link custom boards
-        working-directory: ./zephyr_workspace/custom_boards
+          submodules: recursive
+      - name: show directory
+        working-directory: ./zephyr_workspace/application
         run: |
+          ls -lap .
+          ls -lap custom_boards
+      - name: link custom boards
+        working-directory: ./zephyr_workspace/application/custom_boards
+        run: |
+          ls -lap .
           ./link.sh
       - name: initialize west
-        working-directory: ./zephyr_workspace
+        working-directory: ./workspace/zephyr_workspace
         run: |
           west update
           west zephyr-export
