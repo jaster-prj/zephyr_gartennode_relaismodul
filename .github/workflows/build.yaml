@@ -1,0 +1,29 @@
+name: CI
+on:
+  workflow_dispatch:
+jobs:
+  build-job:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/jaster-prj/devcontainer-zephyr-dev:latest
+    steps:
+      - name: Clone Workspace
+        uses: actions/checkout@v4
+        with:
+          repository: jaster-prj/zephyr_workspace
+          path: './zephyr_workspace'
+      - name: Clone Application
+        uses: actions/checkout@v4
+        with:
+          path: './zephyr_workspace/application'
+          submodules: 'true'
+      - name: link custom boards
+        working-directory: ./zephyr_workspace/custom_boards
+        run: |
+          ./link.sh
+      - name: initialize west
+        working-directory: ./zephyr_workspace
+        run: |
+          west update
+          west zephyr-export
+          pip install -r zephyr/scripts/requirements.txt
