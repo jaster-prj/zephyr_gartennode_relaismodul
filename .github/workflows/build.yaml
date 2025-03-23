@@ -17,19 +17,39 @@ jobs:
         with:
           path: './zephyr_workspace/application'
           submodules: recursive
-      - name: show directory
-        working-directory: ./zephyr_workspace/application
-        run: |
-          ls -lap .
-          ls -lap custom_boards
       - name: link custom boards
         working-directory: ./zephyr_workspace/application/custom_boards
         run: |
           ls -lap .
           ./link.sh
+      - name: show boards directory
+        working-directory: ./zephyr_workspace/application
+        run: |
+          ls -lap boards
       - name: initialize west
-        working-directory: ./workspace/zephyr_workspace
+        working-directory: ./zephyr_workspace
         run: |
           west update
           west zephyr-export
           pip install -r zephyr/scripts/requirements.txt
+      - name: patch git
+        working-directory: ./zephyr_workspace/zephyr
+        run: |
+          git apply ../.patch/gpio_pcf857x.patch
+      - name: save gartennode.pem
+        working-directory: ./zephyr_workspace/bootloader/mcuboot
+        run: |
+          echo "$PEM" | base64 --decode > gartennode.pem
+        shell: bash
+        env:
+          PEM: ${{ secrets.ZEPHYR_SIGN_KEY }}
+      - name: build application
+        working-directory: ./zephyr_workspace
+        run: |
+          west build -b gartennode application --build-dir build -- -DEXTRA_CONF_FILE=prj.conf
+          imgtool sign --header-size 0x200 --align 8 --version 1.2 --slot-size 0x30000 --key bootloader/mcuboot/gartennode.pem --pad build/zephyr/zephyr.bin signed_zephyr.bin
+      - name: Publish binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: signed_zephyr
+          path: zephyr_workspace/signed_zephyr.bin
