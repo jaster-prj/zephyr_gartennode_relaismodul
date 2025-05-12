@@ -20,12 +20,7 @@ jobs:
       - name: link custom boards
         working-directory: ./zephyr_workspace/application/custom_boards
         run: |
-          ls -lap .
           ./link.sh
-      - name: show boards directory
-        working-directory: ./zephyr_workspace/application
-        run: |
-          ls -lap boards
       - name: initialize west
         working-directory: ./zephyr_workspace
         run: |

@@ -8,8 +8,8 @@ Description=
 CreationTime=2:52PM
 CreationDate=09-18-2019
 CreatedBy=
-ModificationTime=4:36PM
-ModificationDate=03-13-2025
+ModificationTime=9:14PM
+ModificationDate=05-12-2025
 ModifiedBy=
 
 [DeviceInfo]
@@ -295,7 +295,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0009
 AccessType=const
-DefaultValue=JP Gartennode [Zysterne]
+DefaultValue=Jaster Products Gartennode
 PDOMapping=0
 
 [1009]
@@ -313,7 +313,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0009
 AccessType=const
-DefaultValue=0.0.17
+DefaultValue=0.0.1
 PDOMapping=0
 
 [1010]
@@ -583,7 +583,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0007
 AccessType=rw
-DefaultValue=$NODEID+0x200
+DefaultValue=0x00000200+$NODEID
 PDOMapping=0
 
 [1400sub2]
@@ -706,7 +706,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0005
 AccessType=rw
-DefaultValue=0
+DefaultValue=6
 PDOMapping=0
 
 [1600sub1]
@@ -715,7 +715,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x00000000
+DefaultValue=0x21020108
 PDOMapping=0
 
 [1600sub2]
@@ -724,7 +724,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x00000000
+DefaultValue=0x21020208
 PDOMapping=0
 
 [1600sub3]
@@ -733,7 +733,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x00000000
+DefaultValue=0x21020308
 PDOMapping=0
 
 [1600sub4]
@@ -742,7 +742,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x00000000
+DefaultValue=0x21020408
 PDOMapping=0
 
 [1600sub5]
@@ -751,7 +751,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x00000000
+DefaultValue=0x21020508
 PDOMapping=0
 
 [1600sub6]
@@ -760,7 +760,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x00000000
+DefaultValue=0x21020608
 PDOMapping=0
 
 [1600sub7]
@@ -1063,7 +1063,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0007
 AccessType=rw
-DefaultValue=$NODEID+0x180
+DefaultValue=0x00000180+$NODEID
 PDOMapping=0
 
 [1800sub2]
@@ -1099,7 +1099,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0006
 AccessType=rw
-DefaultValue=1000
+DefaultValue=0
 PDOMapping=0
 
 [1800sub6]
@@ -1141,7 +1141,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0005
 AccessType=rw
-DefaultValue=255
+DefaultValue=254
 PDOMapping=0
 
 [1801sub3]
@@ -1168,7 +1168,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0006
 AccessType=rw
-DefaultValue=1000
+DefaultValue=0
 PDOMapping=0
 
 [1801sub6]
@@ -1210,7 +1210,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0005
 AccessType=rw
-DefaultValue=255
+DefaultValue=254
 PDOMapping=0
 
 [1802sub3]
@@ -1237,7 +1237,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0006
 AccessType=rw
-DefaultValue=1000
+DefaultValue=0
 PDOMapping=0
 
 [1802sub6]
@@ -1330,7 +1330,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0005
 AccessType=rw
-DefaultValue=2
+DefaultValue=6
 PDOMapping=0
 
 [1A00sub1]
@@ -1339,7 +1339,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x21040020
+DefaultValue=0x21020108
 PDOMapping=0
 
 [1A00sub2]
@@ -1348,7 +1348,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x21060020
+DefaultValue=0x21020208
 PDOMapping=0
 
 [1A00sub3]
@@ -1357,7 +1357,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x00000000
+DefaultValue=0x21020308
 PDOMapping=0
 
 [1A00sub4]
@@ -1366,7 +1366,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x00000000
+DefaultValue=0x21020408
 PDOMapping=0
 
 [1A00sub5]
@@ -1375,7 +1375,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x00000000
+DefaultValue=0x21020508
 PDOMapping=0
 
 [1A00sub6]
@@ -1384,7 +1384,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x00000000
+DefaultValue=0x21020608
 PDOMapping=0
 
 [1A00sub7]
@@ -1417,7 +1417,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0005
 AccessType=rw
-DefaultValue=1
+DefaultValue=0
 PDOMapping=0
 
 [1A01sub1]
@@ -1426,7 +1426,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x21090020
+DefaultValue=0x00000000
 PDOMapping=0
 
 [1A01sub2]
@@ -1504,7 +1504,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0005
 AccessType=rw
-DefaultValue=2
+DefaultValue=0
 PDOMapping=0
 
 [1A02sub1]
@@ -1513,7 +1513,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x21120110
+DefaultValue=0x00000000
 PDOMapping=0
 
 [1A02sub2]
@@ -1522,7 +1522,7 @@ ObjectType=0x7
 ;StorageLocation=ROM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x21120210
+DefaultValue=0x00000000
 PDOMapping=0
 
 [1A02sub3]
@@ -1772,20 +1772,10 @@ DefaultValue=0x00000000
 PDOMapping=0
 
 [ManufacturerObjects]
-SupportedObjects=13
+SupportedObjects=3
 1=0x2100
 2=0x2101
 3=0x2102
-4=0x2103
-5=0x2104
-6=0x2105
-7=0x2106
-8=0x2107
-9=0x2108
-10=0x2109
-11=0x2110
-12=0x2111
-13=0x2112
 
 [2100]
 ParameterName=Error status bits
@@ -1806,124 +1796,70 @@ DefaultValue=0
 PDOMapping=1
 
 [2102]
-ParameterName=Pressure enable
-ObjectType=0x7
-;StorageLocation=RAM
-DataType=0x0005
-AccessType=rw
-DefaultValue=0
-PDOMapping=1
-
-[2103]
-ParameterName=Pressure periode
-ObjectType=0x7
-;StorageLocation=RAM
-DataType=0x0007
-AccessType=rw
-DefaultValue=100
-PDOMapping=1
-
-[2104]
-ParameterName=Pressure measurement
-ObjectType=0x7
-;StorageLocation=RAM
-DataType=0x0007
-AccessType=ro
-DefaultValue=0
-PDOMapping=1
-
-[2105]
-ParameterName=Pressure distance max
-ObjectType=0x7
-;StorageLocation=RAM
-DataType=0x0005
-AccessType=wo
-DefaultValue=0
-PDOMapping=1
-
-[2106]
-ParameterName=Pressure distance
-ObjectType=0x7
-;StorageLocation=RAM
-DataType=0x0007
-AccessType=ro
-DefaultValue=0
-PDOMapping=1
-
-[2107]
-ParameterName=Ultrasonic enable
-ObjectType=0x7
-;StorageLocation=RAM
-DataType=0x0005
-AccessType=rw
-DefaultValue=0
-PDOMapping=1
-
-[2108]
-ParameterName=Ultrasonic periode
-ObjectType=0x7
-;StorageLocation=RAM
-DataType=0x0007
-AccessType=rw
-DefaultValue=100
-PDOMapping=1
-
-[2109]
-ParameterName=Ultrasonic distance
-ObjectType=0x7
-;StorageLocation=RAM
-DataType=0x0007
-AccessType=ro
-DefaultValue=0
-PDOMapping=1
-
-[2110]
-ParameterName=Temperature enable
-ObjectType=0x7
-;StorageLocation=RAM
-DataType=0x0005
-AccessType=rw
-DefaultValue=0
-PDOMapping=1
-
-[2111]
-ParameterName=Temperature periode
-ObjectType=0x7
-;StorageLocation=RAM
-DataType=0x0007
-AccessType=rw
-DefaultValue=100
-PDOMapping=1
-
-[2112]
-ParameterName=Temperature value
+ParameterName=Outputs
 ObjectType=0x8
 ;StorageLocation=RAM
-SubNumber=0x3
+SubNumber=0x7
 
-[2112sub0]
+[2102sub0]
 ParameterName=max sub-index
 ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0005
 AccessType=ro
-DefaultValue=2
+DefaultValue=6
 PDOMapping=1
 
-[2112sub1]
+[2102sub1]
 ParameterName=
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0003
+DataType=0x0001
 AccessType=rw
 DefaultValue=
 PDOMapping=1
 
-[2112sub2]
+[2102sub2]
 ParameterName=
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0003
+DataType=0x0001
+AccessType=rw
+DefaultValue=
+PDOMapping=1
+
+[2102sub3]
+ParameterName=
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0001
+AccessType=rw
+DefaultValue=
+PDOMapping=1
+
+[2102sub4]
+ParameterName=
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0001
+AccessType=rw
+DefaultValue=
+PDOMapping=1
+
+[2102sub5]
+ParameterName=
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0001
+AccessType=rw
+DefaultValue=
+PDOMapping=1
+
+[2102sub6]
+ParameterName=
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0001
 AccessType=rw
 DefaultValue=
 PDOMapping=1
