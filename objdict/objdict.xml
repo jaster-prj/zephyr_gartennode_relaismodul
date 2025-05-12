@@ -56,7 +56,7 @@
       <description />
       <accessFunctionPreCode />
     </CANopenObject>
-    <CANopenObject index="1008" name="Manufacturer device name" objectType="VAR" memoryType="ROM" dataType="0x09" accessType="const" PDOmapping="no" defaultValue="JP Gartennode [Zysterne]" highValue="" lowValue="" subNumber="0" accessFunctionName="" disabled="false" TPDOdetectCOS="false">
+    <CANopenObject index="1008" name="Manufacturer device name" objectType="VAR" memoryType="ROM" dataType="0x09" accessType="const" PDOmapping="no" defaultValue="Jaster Products Gartennode" highValue="" lowValue="" subNumber="0" accessFunctionName="" disabled="false" TPDOdetectCOS="false">
       <description />
       <accessFunctionPreCode />
     </CANopenObject>
@@ -64,7 +64,7 @@
       <description />
       <accessFunctionPreCode />
     </CANopenObject>
-    <CANopenObject index="100a" name="Manufacturer software version" objectType="VAR" memoryType="ROM" dataType="0x09" accessType="const" PDOmapping="no" defaultValue="0.0.17" highValue="" lowValue="" subNumber="0" accessFunctionName="" disabled="false" TPDOdetectCOS="false">
+    <CANopenObject index="100a" name="Manufacturer software version" objectType="VAR" memoryType="ROM" dataType="0x09" accessType="const" PDOmapping="no" defaultValue="0.0.1" highValue="" lowValue="" subNumber="0" accessFunctionName="" disabled="false" TPDOdetectCOS="false">
       <description />
       <accessFunctionPreCode />
     </CANopenObject>
@@ -189,7 +189,7 @@
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="VAR" dataType="0x05" accessType="ro" PDOmapping="no" defaultValue="2" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="$NODEID+0x200" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x00000200+$NODEID" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="VAR" dataType="0x05" accessType="rw" PDOmapping="no" defaultValue="254" highValue="" lowValue="" TPDOdetectCOS="false">
@@ -238,25 +238,25 @@
     </CANopenObject>
     <CANopenObject index="1600" name="RPDO mapping parameter" objectType="REC" memoryType="ROM" dataType="0x00" accessType="rw" PDOmapping="no" defaultValue="" highValue="" lowValue="" subNumber="9" accessFunctionName="" disabled="false" TPDOdetectCOS="false">
       <description />
-      <CANopenSubObject subIndex="00" name="Number of mapped objects" objectType="VAR" dataType="0x05" accessType="rw" PDOmapping="no" defaultValue="0" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="00" name="Number of mapped objects" objectType="VAR" dataType="0x05" accessType="rw" PDOmapping="no" defaultValue="6" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="01" name="mapped object 1" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x00000000" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="01" name="mapped object 1" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x21020108" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="02" name="mapped object 2" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x00000000" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="02" name="mapped object 2" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x21020208" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="03" name="mapped object 3" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x00000000" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="03" name="mapped object 3" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x21020308" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="04" name="mapped object 4" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x00000000" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="04" name="mapped object 4" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x21020408" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="05" name="mapped object 5" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x00000000" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="05" name="mapped object 5" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x21020508" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="06" name="mapped object 6" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x00000000" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="06" name="mapped object 6" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x21020608" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
       <CANopenSubObject subIndex="07" name="mapped object 7" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x00000000" highValue="" lowValue="" TPDOdetectCOS="false">
@@ -365,7 +365,7 @@
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="VAR" dataType="0x05" accessType="ro" PDOmapping="no" defaultValue="6" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="$NODEID+0x180" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x00000180+$NODEID" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="VAR" dataType="0x05" accessType="rw" PDOmapping="no" defaultValue="254" highValue="" lowValue="" TPDOdetectCOS="false">
@@ -377,7 +377,7 @@
       <CANopenSubObject subIndex="04" name="compatibility entry" objectType="VAR" dataType="0x05" accessType="ro" PDOmapping="no" defaultValue="0" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="05" name="event timer" objectType="VAR" dataType="0x06" accessType="rw" PDOmapping="no" defaultValue="1000" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="05" name="event timer" objectType="VAR" dataType="0x06" accessType="rw" PDOmapping="no" defaultValue="0" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
       <CANopenSubObject subIndex="06" name="SYNC start value" objectType="VAR" dataType="0x05" accessType="rw" PDOmapping="no" defaultValue="0" highValue="" lowValue="" TPDOdetectCOS="false">
@@ -393,7 +393,7 @@
       <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="$NODEID+0x280" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="02" name="transmission type" objectType="VAR" dataType="0x05" accessType="rw" PDOmapping="no" defaultValue="255" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="02" name="transmission type" objectType="VAR" dataType="0x05" accessType="rw" PDOmapping="no" defaultValue="254" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
       <CANopenSubObject subIndex="03" name="inhibit time" objectType="VAR" dataType="0x06" accessType="rw" PDOmapping="no" defaultValue="0" highValue="" lowValue="" TPDOdetectCOS="false">
@@ -402,7 +402,7 @@
       <CANopenSubObject subIndex="04" name="compatibility entry" objectType="VAR" dataType="0x05" accessType="ro" PDOmapping="no" defaultValue="0" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="05" name="event timer" objectType="VAR" dataType="0x06" accessType="rw" PDOmapping="no" defaultValue="1000" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="05" name="event timer" objectType="VAR" dataType="0x06" accessType="rw" PDOmapping="no" defaultValue="0" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
       <CANopenSubObject subIndex="06" name="SYNC start value" objectType="VAR" dataType="0x05" accessType="rw" PDOmapping="no" defaultValue="0" highValue="" lowValue="" TPDOdetectCOS="false">
@@ -418,7 +418,7 @@
       <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="$NODEID+0x380" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="02" name="transmission type" objectType="VAR" dataType="0x05" accessType="rw" PDOmapping="no" defaultValue="255" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="02" name="transmission type" objectType="VAR" dataType="0x05" accessType="rw" PDOmapping="no" defaultValue="254" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
       <CANopenSubObject subIndex="03" name="inhibit time" objectType="VAR" dataType="0x06" accessType="rw" PDOmapping="no" defaultValue="0" highValue="" lowValue="" TPDOdetectCOS="false">
@@ -427,7 +427,7 @@
       <CANopenSubObject subIndex="04" name="compatibility entry" objectType="VAR" dataType="0x05" accessType="ro" PDOmapping="no" defaultValue="0" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="05" name="event timer" objectType="VAR" dataType="0x06" accessType="rw" PDOmapping="no" defaultValue="1000" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="05" name="event timer" objectType="VAR" dataType="0x06" accessType="rw" PDOmapping="no" defaultValue="0" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
       <CANopenSubObject subIndex="06" name="SYNC start value" objectType="VAR" dataType="0x05" accessType="rw" PDOmapping="no" defaultValue="0" highValue="" lowValue="" TPDOdetectCOS="false">
@@ -462,25 +462,25 @@
     </CANopenObject>
     <CANopenObject index="1a00" name="TPDO mapping parameter" objectType="REC" memoryType="ROM" dataType="0x00" accessType="rw" PDOmapping="no" defaultValue="" highValue="" lowValue="" subNumber="9" accessFunctionName="" disabled="false" TPDOdetectCOS="false">
       <description />
-      <CANopenSubObject subIndex="00" name="Number of mapped objects" objectType="VAR" dataType="0x05" accessType="rw" PDOmapping="no" defaultValue="2" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="00" name="Number of mapped objects" objectType="VAR" dataType="0x05" accessType="rw" PDOmapping="no" defaultValue="6" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="01" name="mapped object 1" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x21040020" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="01" name="mapped object 1" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x21020108" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="02" name="mapped object 2" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x21060020" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="02" name="mapped object 2" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x21020208" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="03" name="mapped object 3" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x00000000" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="03" name="mapped object 3" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x21020308" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="04" name="mapped object 4" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x00000000" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="04" name="mapped object 4" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x21020408" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="05" name="mapped object 5" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x00000000" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="05" name="mapped object 5" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x21020508" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="06" name="mapped object 6" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x00000000" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="06" name="mapped object 6" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x21020608" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
       <CANopenSubObject subIndex="07" name="mapped object 7" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x00000000" highValue="" lowValue="" TPDOdetectCOS="false">
@@ -493,10 +493,10 @@
     </CANopenObject>
     <CANopenObject index="1a01" name="TPDO mapping parameter" objectType="REC" memoryType="ROM" dataType="0x00" accessType="rw" PDOmapping="no" defaultValue="" highValue="" lowValue="" subNumber="9" accessFunctionName="" disabled="false" TPDOdetectCOS="false">
       <description />
-      <CANopenSubObject subIndex="00" name="Number of mapped objects" objectType="VAR" dataType="0x05" accessType="rw" PDOmapping="no" defaultValue="1" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="00" name="Number of mapped objects" objectType="VAR" dataType="0x05" accessType="rw" PDOmapping="no" defaultValue="0" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="01" name="mapped object 1" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x21090020" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="01" name="mapped object 1" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x00000000" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
       <CANopenSubObject subIndex="02" name="mapped object 2" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x00000000" highValue="" lowValue="" TPDOdetectCOS="false">
@@ -524,13 +524,13 @@
     </CANopenObject>
     <CANopenObject index="1a02" name="TPDO mapping parameter" objectType="REC" memoryType="ROM" dataType="0x00" accessType="rw" PDOmapping="no" defaultValue="" highValue="" lowValue="" subNumber="9" accessFunctionName="" disabled="false" TPDOdetectCOS="false">
       <description />
-      <CANopenSubObject subIndex="00" name="Number of mapped objects" objectType="VAR" dataType="0x05" accessType="rw" PDOmapping="no" defaultValue="2" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="00" name="Number of mapped objects" objectType="VAR" dataType="0x05" accessType="rw" PDOmapping="no" defaultValue="0" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="01" name="mapped object 1" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x21120110" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="01" name="mapped object 1" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x00000000" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="02" name="mapped object 2" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x21120210" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="02" name="mapped object 2" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x00000000" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
       <CANopenSubObject subIndex="03" name="mapped object 3" objectType="VAR" dataType="0x07" accessType="rw" PDOmapping="no" defaultValue="0x00000000" highValue="" lowValue="" TPDOdetectCOS="false">
@@ -636,62 +636,34 @@
       <description />
       <accessFunctionPreCode />
     </CANopenObject>
-    <CANopenObject index="2102" name="Pressure enable" objectType="VAR" memoryType="RAM" dataType="0x05" accessType="rw" PDOmapping="optional" defaultValue="0" highValue="" lowValue="" subNumber="0" accessFunctionName="" disabled="false" TPDOdetectCOS="false">
+    <CANopenObject index="2102" name="Outputs" objectType="ARRAY" memoryType="RAM" dataType="0x01" accessType="rw" PDOmapping="optional" defaultValue="" highValue="" lowValue="" subNumber="7" accessFunctionName="" disabled="false" TPDOdetectCOS="false">
       <description />
-      <accessFunctionPreCode />
-    </CANopenObject>
-    <CANopenObject index="2103" name="Pressure periode" objectType="VAR" memoryType="RAM" dataType="0x07" accessType="rw" PDOmapping="optional" defaultValue="100" highValue="" lowValue="" subNumber="0" accessFunctionName="" disabled="false" TPDOdetectCOS="false">
-      <description />
-      <accessFunctionPreCode />
-    </CANopenObject>
-    <CANopenObject index="2104" name="Pressure measurement" objectType="VAR" memoryType="RAM" dataType="0x07" accessType="ro" PDOmapping="optional" defaultValue="0" highValue="" lowValue="" subNumber="0" accessFunctionName="" disabled="false" TPDOdetectCOS="false">
-      <description />
-      <accessFunctionPreCode />
-    </CANopenObject>
-    <CANopenObject index="2105" name="Pressure distance max" objectType="VAR" memoryType="RAM" dataType="0x05" accessType="wo" PDOmapping="optional" defaultValue="0" highValue="" lowValue="" subNumber="0" accessFunctionName="" disabled="false" TPDOdetectCOS="false">
-      <description />
-      <accessFunctionPreCode />
-    </CANopenObject>
-    <CANopenObject index="2106" name="Pressure distance" objectType="VAR" memoryType="RAM" dataType="0x07" accessType="ro" PDOmapping="optional" defaultValue="0" highValue="" lowValue="" subNumber="0" accessFunctionName="" disabled="false" TPDOdetectCOS="false">
-      <description />
-      <accessFunctionPreCode />
-    </CANopenObject>
-    <CANopenObject index="2107" name="Ultrasonic enable" objectType="VAR" memoryType="RAM" dataType="0x05" accessType="rw" PDOmapping="optional" defaultValue="0" highValue="" lowValue="" subNumber="0" accessFunctionName="" disabled="false" TPDOdetectCOS="false">
-      <description />
-      <accessFunctionPreCode />
-    </CANopenObject>
-    <CANopenObject index="2108" name="Ultrasonic periode" objectType="VAR" memoryType="RAM" dataType="0x07" accessType="rw" PDOmapping="optional" defaultValue="100" highValue="" lowValue="" subNumber="0" accessFunctionName="" disabled="false" TPDOdetectCOS="false">
-      <description />
-      <accessFunctionPreCode />
-    </CANopenObject>
-    <CANopenObject index="2109" name="Ultrasonic distance" objectType="VAR" memoryType="RAM" dataType="0x07" accessType="ro" PDOmapping="optional" defaultValue="0" highValue="" lowValue="" subNumber="0" accessFunctionName="" disabled="false" TPDOdetectCOS="false">
-      <description />
-      <accessFunctionPreCode />
-    </CANopenObject>
-    <CANopenObject index="2110" name="Temperature enable" objectType="VAR" memoryType="RAM" dataType="0x05" accessType="rw" PDOmapping="optional" defaultValue="0" highValue="" lowValue="" subNumber="0" accessFunctionName="" disabled="false" TPDOdetectCOS="false">
-      <description />
-      <accessFunctionPreCode />
-    </CANopenObject>
-    <CANopenObject index="2111" name="Temperature periode" objectType="VAR" memoryType="RAM" dataType="0x07" accessType="rw" PDOmapping="optional" defaultValue="100" highValue="" lowValue="" subNumber="0" accessFunctionName="" disabled="false" TPDOdetectCOS="false">
-      <description />
-      <accessFunctionPreCode />
-    </CANopenObject>
-    <CANopenObject index="2112" name="Temperature value" objectType="ARRAY" memoryType="RAM" dataType="0x03" accessType="rw" PDOmapping="optional" defaultValue="" highValue="" lowValue="" subNumber="3" accessFunctionName="" disabled="false" TPDOdetectCOS="false">
-      <description />
-      <CANopenSubObject subIndex="00" name="max sub-index" objectType="VAR" dataType="0x05" accessType="ro" PDOmapping="optional" defaultValue="2" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="VAR" dataType="0x05" accessType="ro" PDOmapping="optional" defaultValue="6" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="01" name="" objectType="VAR" dataType="0x03" accessType="rw" PDOmapping="optional" defaultValue="" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="01" name="" objectType="VAR" dataType="0x01" accessType="rw" PDOmapping="optional" defaultValue="" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
-      <CANopenSubObject subIndex="02" name="" objectType="VAR" dataType="0x03" accessType="rw" PDOmapping="optional" defaultValue="" highValue="" lowValue="" TPDOdetectCOS="false">
+      <CANopenSubObject subIndex="02" name="" objectType="VAR" dataType="0x01" accessType="rw" PDOmapping="optional" defaultValue="" highValue="" lowValue="" TPDOdetectCOS="false">
+        <description />
+      </CANopenSubObject>
+      <CANopenSubObject subIndex="03" name="" objectType="VAR" dataType="0x01" accessType="rw" PDOmapping="optional" defaultValue="" highValue="" lowValue="" TPDOdetectCOS="false">
+        <description />
+      </CANopenSubObject>
+      <CANopenSubObject subIndex="04" name="" objectType="VAR" dataType="0x01" accessType="rw" PDOmapping="optional" defaultValue="" highValue="" lowValue="" TPDOdetectCOS="false">
+        <description />
+      </CANopenSubObject>
+      <CANopenSubObject subIndex="05" name="" objectType="VAR" dataType="0x01" accessType="rw" PDOmapping="optional" defaultValue="" highValue="" lowValue="" TPDOdetectCOS="false">
+        <description />
+      </CANopenSubObject>
+      <CANopenSubObject subIndex="06" name="" objectType="VAR" dataType="0x01" accessType="rw" PDOmapping="optional" defaultValue="" highValue="" lowValue="" TPDOdetectCOS="false">
         <description />
       </CANopenSubObject>
       <accessFunctionPreCode />
     </CANopenObject>
   </CANopenObjectList>
   <other>
-    <file fileCreator="" fileCreationDate="09-18-2019" fileCreationTime="2:52nachm." fileModifedBy="" fileMotifcationDate="03-13-2025" fileModificationTime="4:36nachm." fileVersion="1" fileRevision="1" exportFolder="" EdsFile="/mnt/Daten/Programmierung/Zypher/test_workspace/application/gartennode_zysterne/objdict/objdict.eds" />
+    <file fileCreator="" fileCreationDate="09-18-2019" fileCreationTime="2:52nachm." fileModifedBy="" fileMotifcationDate="05-12-2025" fileModificationTime="9:14nachm." fileVersion="1" fileRevision="1" exportFolder="" EdsFile="/mnt/Daten/Programmierung/zephyr/zephyr_gartennode_relaismodul/objdict/objdict.eds" />
     <DeviceIdentity>
       <vendorName>Jaster Products</vendorName>
       <vendorNumber>0</vendorNumber>
