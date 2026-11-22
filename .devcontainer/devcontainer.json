@@ -1,0 +1,9 @@
+{
+  "name": "GARTENNODE Relaismodul Devcontainer",
+  "image": "ghcr.io/jaster-prj/devcontainer-zephyr:latest",
+  "runArgs": [
+    "--name=Gartennode_Relaismodul_Devcontainer"
+  ],
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace/application,type=bind",
+  "workspaceFolder": "/workspace"
+}

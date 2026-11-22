@@ -11,4 +11,26 @@ config CANOPEN_NODE_ID
 	help
 	  7-bit CANopen Node ID
 
+config RELAY_UPDATE_DIAGNOSTICS
+	bool "Record CANopen update timing and reset causes"
+	depends on CANOPENNODE_PROGRAM_DOWNLOAD && SOC_FAMILY_STM32
+	select HWINFO
+	select LOG_RUNTIME_FILTERING
+	help
+	  Record download progress and callback latency without changing the
+	  flash operation. Suppress GPIO-expander log noise to preserve diagnostic
+	  buffer space. Intended for hardware update regression tests.
+
+# Match Gartennode's scratch layout, not Zephyr's newer offset-swap default.
+# Defaults leave native_sim, which does not use MCUboot, unaffected.
+choice MCUBOOT_BOOTLOADER_MODE
+	default MCUBOOT_BOOTLOADER_MODE_SWAP_SCRATCH if BOARD_GARTENNODE && BOOTLOADER_MCUBOOT
+endchoice
+
+config MCUBOOT_IMGTOOL_SIGN_VERSION
+	default "0.1.0" if BOARD_GARTENNODE && BOOTLOADER_MCUBOOT
+
+config MCUBOOT_EXTRA_IMGTOOL_ARGS
+	default "--pad" if BOARD_GARTENNODE && BOOTLOADER_MCUBOOT
+
 source "Kconfig.zephyr"

@@ -4,15 +4,45 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+#if defined(CONFIG_BOARD_NATIVE_SIM)
+#define _POSIX_C_SOURCE 200809L
+#endif
+
 #include <zephyr/kernel.h>
 #include <zephyr/drivers/gpio.h>
-//#include <zephyr/drivers/led_strip.h>
 #include <zephyr/sys/reboot.h>
 #include <zephyr/settings/settings.h>
 #include <zephyr/drivers/sensor.h>
 #include <canopennode.h>
+#include "relay.h"
+#include "update_control.h"
+#include "update_diagnostics.h"
+#if defined(CONFIG_BOARD_NATIVE_SIM)
+#include <time.h>
+#include <zephyr/drivers/can.h>
+#include <zephyr/devicetree.h>
+#include <zephyr/sys/util.h>
+K_SEM_DEFINE(native_sim_can_rx_wakeup, 0, 1);
 
-#define LOG_LEVEL CONFIG_CANOPEN_LOG_LEVEL
+static int64_t native_sim_monotonic_ms(void)
+{
+	struct timespec now;
+
+	clock_gettime(CLOCK_MONOTONIC, &now);
+	return (int64_t)now.tv_sec * 1000 + now.tv_nsec / 1000000;
+}
+
+static void native_sim_can_bus_activity(const struct device *dev,
+					struct can_frame *frame, void *user_data)
+{
+	ARG_UNUSED(dev);
+	ARG_UNUSED(frame);
+	ARG_UNUSED(user_data);
+	k_sem_give(&native_sim_can_rx_wakeup);
+}
+#endif
+
+#define LOG_LEVEL CONFIG_CANOPENNODE_LOG_LEVEL
 #include <zephyr/logging/log.h>
 LOG_MODULE_REGISTER(app);
 
@@ -25,19 +55,6 @@ static struct gpio_dt_spec led_green_gpio = GPIO_DT_SPEC_GET_OR(
 		DT_ALIAS(green_led), gpios, {0});
 static struct gpio_dt_spec led_red_gpio = GPIO_DT_SPEC_GET_OR(
 		DT_ALIAS(red_led), gpios, {0});
-
-const struct device *pcf857x;
-
-const int outputLookupTable[6] = {2,1,0,5,4,3};
-static uint8_t output[8] = {0};
-
-struct led_indicator {
-	const struct device *dev;
-	gpio_pin_t pin;
-};
-
-void writeOutput(void);
-static void config_relais(void);
 
 /**
  * @brief Callback for setting LED indicator state.
@@ -101,18 +118,6 @@ static void config_leds(CO_NMT_t *nmt)
 			  led_callback, &led_red_gpio);
 }
 
-static void config_relais(void) {
-    pcf857x = DEVICE_DT_GET(DT_NODELABEL(pcf8575));
-	if (!pcf857x) {
-		LOG_INF("device not found");
-		return;
-	}
-
-	for (int i=0;i<6;i++) {
-		gpio_pin_configure(pcf857x, (gpio_pin_t)outputLookupTable[i], GPIO_OUTPUT);
-	}
-}
-
 /**
  * @brief Main application entry point.
  *
@@ -157,6 +162,12 @@ int main(void)
 	while (reset != CO_RESET_APP) {
 		elapsed =  0U; /* milliseconds */
 
+#if defined(CONFIG_BOARD_NATIVE_SIM)
+		/* Start node 11 in Operational and periodically report relay states. */
+		OD_NMTStartup = 8U;
+		OD_producerHeartbeatTime = 1000U;
+		OD_TPDOCommunicationParameter[0].eventTimer = 250U;
+#endif
 
 		err = CO_init(&can, CONFIG_CANOPEN_NODE_ID, CAN_BITRATE);
 		if (err != CO_ERROR_NO) {
@@ -171,26 +182,72 @@ int main(void)
 #endif /* CONFIG_CANOPENNODE_STORAGE */
 
 		config_leds(CO->NMT);
-		config_relais();
+		relay_init();
 
 		if (IS_ENABLED(CONFIG_CANOPENNODE_PROGRAM_DOWNLOAD)) {
 			canopen_program_download_attach(CO->NMT, CO->SDO[0],
 							CO->em);
+			relay_update_control_attach(CO->SDO[0]);
+#if defined(CONFIG_RELAY_UPDATE_DIAGNOSTICS)
+			relay_update_diagnostics_attach(CO->SDO[0]);
+#endif
 		}
+
+#if defined(CONFIG_BOARD_NATIVE_SIM)
+		const struct can_filter native_sim_wakeup_filter = {
+			.id = 0U,
+			.mask = 0U,
+		};
+		int native_sim_wakeup_filter_id =
+			can_add_rx_filter(can.dev, native_sim_can_bus_activity, NULL,
+					  &native_sim_wakeup_filter);
+		if (native_sim_wakeup_filter_id < 0) {
+			LOG_ERR("Failed to add native-sim CAN activity filter: %d",
+				native_sim_wakeup_filter_id);
+		}
+#endif
 
 		CO_CANsetNormalMode(CO->CANmodule[0]);
 
 		while (true) {
 			timeout = 1U; /* default timeout in milliseconds */
+#if defined(CONFIG_BOARD_NATIVE_SIM)
+			timestamp = native_sim_monotonic_ms();
+#else
 			timestamp = k_uptime_get();
+#endif
 			reset = CO_process(CO, (uint16_t)elapsed, &timeout);
 
 			if (reset != CO_RESET_NOT) {
 				break;
 			}
+#if defined(CONFIG_BOARD_NATIVE_SIM)
+			/*
+			 * The native simulator has no deterministic SYNC worker. Process
+			 * the asynchronous relay RPDO/TPDO in the application loop, just
+			 * as the regular CANopen worker does on the hardware target.
+			 */
+			CO_LOCK_OD();
+			CO_process_RPDO(CO, false);
+			CO_process_TPDO(CO, false, elapsed * 1000U);
+			CO_UNLOCK_OD();
+#endif
 
+#if defined(CONFIG_BOARD_NATIVE_SIM)
+			/*
+			 * CANopenNode timers use elapsed time, but native_sim's kernel
+			 * uptime can remain static while waiting on UDP CAN. Use the
+			 * monotonic host clock and wake promptly on incoming bus traffic.
+			 */
+			relay_process();
+			(void)k_sem_take(&native_sim_can_rx_wakeup, K_MSEC(MAX(timeout, 10U)));
+			elapsed = (uint32_t)(native_sim_monotonic_ms() - timestamp);
+			if (elapsed == 0U) {
+				elapsed = 1U;
+			}
+#else
 			if (timeout > 0) {
-				writeOutput();
+				relay_process();
 
 #ifdef CONFIG_CANOPENNODE_STORAGE
 				ret = canopen_storage_save(
@@ -211,8 +268,17 @@ int main(void)
 				 * Do not sleep, more processing to be
 				 * done by the stack.
 				 */
+#if defined(CONFIG_BOARD_NATIVE_SIM)
+				(void)k_sem_take(&native_sim_can_rx_wakeup, K_MSEC(10));
+				elapsed = (uint32_t)(native_sim_monotonic_ms() - timestamp);
+				if (elapsed == 0U) {
+					elapsed = 1U;
+				}
+#else
 				elapsed = 0U;
+#endif
 			}
+#endif
 		}
 
 		if (reset == CO_RESET_COMM) {
@@ -224,19 +290,4 @@ int main(void)
 
 	CO_delete(&can);
 	sys_reboot(SYS_REBOOT_COLD);
-}
-
-void writeOutput(void) {
-	for (uint8_t i=0;i<8;i++) {
-		if (output[i] != (uint8_t)(OD_outputs[i])) {
-			int set_value = 0; 
-			if ((int)(OD_outputs[i]) != 0) {
-				set_value = 1;
-			}
-			int response = gpio_pin_set(pcf857x, outputLookupTable[i], set_value);
-			if (response == 0) {
-				output[i] = (uint8_t)(OD_outputs[i]);
-			}
-		}
-	}
 }

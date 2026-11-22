@@ -2,33 +2,36 @@ name: CI
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/jaster-prj/devcontainer-zephyr-workspace:latest
+      volumes:
+        - /opt/hostedtoolcache:/delete-me
     outputs:
       artifact-url: ${{ steps.artifact-upload.outputs.artifact-url }}
       artifact-id: ${{ steps.artifact-upload.outputs.artifact-id }}
     steps:
+      - name: Clean Out Deletable Files
+        run: rm -rf /delete-me/*
+        shell: bash
       - name: link workspace
         run: |
           ln -s /workspace ./zephyr_workspace
+      - name: Download zephyr
+        working-directory: ./zephyr_workspace
+        run: |
+          west update
+          /opt/venv/bin/python -m pip install -r zephyr/scripts/requirements.txt
+          west zephyr-export
       - name: Clone Application
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
-          path: './zephyr_workspace/app'
+          path: './zephyr_workspace/application'
           submodules: recursive
-      - name: link custom boards
-        working-directory: ./zephyr_workspace/app/custom_boards
-        run: |
-          ./link.sh
-      - name: patch git
-        working-directory: ./zephyr_workspace/zephyr
-        run: |
-          git apply ../.patch/gpio_pcf857x.patch
       - name: save gartennode.pem
         working-directory: ./zephyr_workspace/bootloader/mcuboot
         run: |
@@ -36,16 +39,29 @@ jobs:
         shell: bash
         env:
           PEM: ${{ secrets.ZEPHYR_SIGN_KEY }}
-      - name: build app
+      - name: Build Bootloader
         working-directory: ./zephyr_workspace
         run: |
-          west build -b gartennode app --build-dir build -- -DEXTRA_CONF_FILE=prj.conf
-          imgtool sign --header-size 0x200 --align 8 --version 1.2 --slot-size 0x30000 --key bootloader/mcuboot/gartennode.pem --pad build/zephyr/zephyr.bin signed_zephyr.bin
-          cp ./app/objdict/objdict.eds .
-          tar -czf software.tar.gz signed_zephyr.bin objdict.eds
+          /opt/venv/bin/west build -b gartennode bootloader/mcuboot/boot/zephyr --build-dir build/bootloader -- -DEXTRA_CONF_FILE="$(pwd)/application/bootloader.conf"
+      - name: Build Application
+        working-directory: ./zephyr_workspace
+        run: |
+          /opt/venv/bin/west build -b gartennode application --build-dir build/application -- -DEXTRA_CONF_FILE=prj.conf
+      - name: Create Software-Container
+        working-directory: ./zephyr_workspace
+        run: |
+          cp build/bootloader/zephyr/zephyr.bin bootloader.bin
+          cp build/application/zephyr/zephyr.bin application.bin
+          cp build/application/zephyr/zephyr.signed.bin application.signed.bin
+          # Use Zephyr's configured header size and MCUboot swap mode.
+          /opt/venv/bin/python application/scripts/check_firmware.py application.signed.bin build/application/zephyr/.config
+          /opt/venv/bin/python -m unittest discover -s application/scripts -p 'test_*.py'
+          /opt/venv/bin/python bootloader/mcuboot/scripts/imgtool.py verify --key bootloader/mcuboot/gartennode.pem application.signed.bin
+          /opt/venv/bin/python application/scripts/prepare_eds.py build/application/zephyr/.config application/objdict/objdict.eds objdict.eds
+          tar -czf software.tar.gz bootloader.bin application.bin application.signed.bin objdict.eds
       - name: Publish binary
         id: artifact-upload
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: softwarefile
           path: zephyr_workspace/software.tar.gz
